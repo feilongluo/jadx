@@ -611,8 +611,13 @@ public class MethodNode extends LineAttrNode implements ILoadable, IDexNode {
 		return "method";
 	}
 
-	public void addWarn(String errStr) {
-		ErrorsCounter.methodWarn(this, errStr);
+	public void addWarn(String warnStr) {
+		ErrorsCounter.methodWarn(this, warnStr);
+	}
+
+	public void addComment(String commentStr) {
+		addAttr(AType.COMMENTS, commentStr);
+		LOG.info("{} in {}", commentStr, this);
 	}
 
 	public void addError(String errStr, Exception e) {

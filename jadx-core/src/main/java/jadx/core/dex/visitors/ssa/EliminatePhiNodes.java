@@ -106,6 +106,8 @@ public class EliminatePhiNodes extends AbstractVisitor {
 		RegisterArg newAssignArg = oldArg.duplicate(newRegNum, null);
 		SSAVar newSVar = mth.makeNewSVar(newRegNum, mth.getNextSVarVersion(newRegNum), newAssignArg);
 		newSVar.setName(oldSVar.getName());
+		// TODO
+		// mth.root().getTypeUpdate().apply(newSVar, assignArg.getType());
 		newSVar.setType(assignArg.getType());
 
 		if (assignParentInsn != null) {

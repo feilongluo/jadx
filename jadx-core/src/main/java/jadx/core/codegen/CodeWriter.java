@@ -50,7 +50,7 @@ public class CodeWriter {
 		this.indent = 0;
 		this.indentStr = "";
 		if (ADD_LINE_NUMBERS) {
-			incIndent(2);
+			incIndent(3);
 		}
 	}
 

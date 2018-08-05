@@ -39,5 +39,6 @@ public class TestArith3 extends IntegrationTest {
 		assertThat(code, containsOne("while (n + 4 < buffer.length) {"));
 		assertThat(code, containsOne("n += len + 5;"));
 		assertThat(code, not(containsString("; n += len + 5) {")));
+		assertThat(code, not(containsString("default:")));
 	}
 }

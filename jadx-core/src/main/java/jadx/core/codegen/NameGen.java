@@ -108,13 +108,22 @@ public class NameGen {
 		String name = arg.getName();
 		String varName = name != null ? name : guessName(arg);
 		if (NameMapper.isReserved(varName)) {
-			return varName + "R";
+			varName = varName + "R";
+		}
+		if (!NameMapper.isValidIdentifier(varName)) {
+			varName = getFallbackName(arg);
 		}
 		return varName;
 	}
 
 	private String getFallbackName(RegisterArg arg) {
-		return "r" + arg.getRegNum();
+		StringBuilder sb = new StringBuilder();
+		sb.append('r').append(arg.getRegNum());
+		SSAVar sVar = arg.getSVar();
+		if (sVar != null) {
+			sb.append('v').append(sVar.getVersion());
+		}
+		return sb.toString();
 	}
 
 	private String guessName(RegisterArg arg) {

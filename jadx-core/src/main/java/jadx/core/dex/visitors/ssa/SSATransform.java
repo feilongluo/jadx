@@ -51,7 +51,7 @@ public class SSATransform extends AbstractVisitor {
 		}
 		renameVariables(mth);
 
-		fixLastAssignInTry(mth);
+//		fixLastAssignInTry(mth);
 		removeBlockerInsns(mth);
 		markThisArgs(mth.getThisArg());
 
@@ -220,7 +220,7 @@ public class SSATransform extends AbstractVisitor {
 			if (parentInsn != null
 					&& parentInsn.getResult() != null
 					&& parentInsn.contains(AFlag.TRY_LEAVE)
-					&& phi.removeArg(arg)) {
+					&& phi.removeArg(arg) /* TODO: fix registers removing*/) {
 				argsCount--;
 				continue;
 			}

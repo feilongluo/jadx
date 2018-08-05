@@ -2,6 +2,8 @@ package jadx.core.dex.instructions.args;
 
 import org.jetbrains.annotations.NotNull;
 
+import jadx.core.dex.visitors.typeinference.TypeInfo;
+
 public class TypeImmutableArg extends RegisterArg {
 
 	public TypeImmutableArg(int rn, ArgType type) {
@@ -15,12 +17,19 @@ public class TypeImmutableArg extends RegisterArg {
 
 	@Override
 	public void setType(ArgType type) {
-		// not allowed
+		// ignore
+	}
+
+	@Override
+	public ArgType getType() {
+		return type;
 	}
 
 	@Override
 	void setSVar(@NotNull SSAVar sVar) {
-		sVar.setTypeImmutable(type);
+		TypeInfo typeInfo = sVar.getTypeInfo();
+		typeInfo.setTypeImmutable(true);
+		typeInfo.setType(type);
 		super.setSVar(sVar);
 	}
 }
